@@ -5,8 +5,8 @@ import time
 
 def get_product_details(url):
     print(f"Fetching details from: {url}")
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, 'html.parser')
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
     
     cpu = 'None'
     hardware_section = soup.select('div', id='code_block-745-114924')
@@ -30,10 +30,10 @@ def get_product_details(url):
 
 base_url = "https://carisinyal.com/hp/?_sfm_harga_status=Available&_sfm_layar_ukuran_layar=1.77+14.61&_sfm_baterai_kapasitas_baterai=0+32000"
 
-soup = BeautifulSoup(base_url.content, 'html.parser')
+response = requests.get(base_url)
+soup = BeautifulSoup(response.content, 'html.parser')
 # Find all product containers
 products = soup.select('div.oxy-post')  # Adjust this selector if needed
-print(f"Found {len(products)} product containers on page {page_number}")
 
 for product in products:
     name_elem = product.select_one('a.oxy-post-title')
