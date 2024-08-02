@@ -38,7 +38,8 @@ for page_number in range(1, total_pages + 1):
     print(f"Scraping page {page_number} of {total_pages}")
     print(f"URL: {url}")
     
-    soup = BeautifulSoup(base_url.content, 'html.parser')
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
     # Find all product containers
     products = soup.select('div.oxy-post')  # Adjust this selector if needed
     print(f"Found {len(products)} product containers on page {page_number}")
